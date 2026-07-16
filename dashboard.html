@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Panel · ALLINYAY</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/animations.css" />
+<link rel="stylesheet" href="/css/dashboard.css" />
+<link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body class="cuerpo-dashboard">
+
+<header id="navbar"></header>
+
+<div class="dash-shell">
+
+  <!-- ===================================================================== SIDEBAR -->
+  <aside class="dash-sidebar">
+    <nav class="dash-nav" aria-label="Secciones del panel">
+      <button class="dash-nav-item dash-nav-activo" data-vista="resumen" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Resumen
+      </button>
+      <button class="dash-nav-item" data-vista="santuarios" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3c2 3-1 4-1 6.5a2.5 2.5 0 0 0 5 0c0-1.5-1-2.5-1-2.5s1.6 2.2 1.6 4.5a4.1 4.1 0 0 1-8.2 0c0-4.7 3.6-5.3 3.6-8.5z"/><path d="M4 21c1.6-2 4-3 8-3s6.4 1 8 3"/></svg>
+        Santuarios
+      </button>
+    </nav>
+    <a class="dash-nav-salir" href="/index.html">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M15 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9M10 12h11M17 8l4 4-4 4"/></svg>
+      Volver al sitio
+    </a>
+  </aside>
+
+  <main class="dash-main">
+
+    <!-- ===================================================================== VISTA: RESUMEN -->
+    <section id="vistaResumen" class="dash-vista dash-vista-activa">
+      <div class="dash-cabecera">
+        <h1>Hola<span id="saludoNombre">.</span></h1>
+        <p>Un vistazo rápido al estado de tus santuarios digitales.</p>
+      </div>
+
+      <div class="dash-stats-grid" id="statsGrid">
+        <div class="loading-row"><span class="spin"></span> Cargando resumen…</div>
+      </div>
+
+      <div class="dash-panel tarjeta">
+        <div class="dash-panel-cabecera">
+          <h2>Comentarios pendientes de moderar</h2>
+        </div>
+        <div id="pendientesLista">
+          <div class="loading-row"><span class="spin"></span> Cargando…</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== VISTA: SANTUARIOS -->
+    <section id="vistaSantuarios" class="dash-vista">
+      <div class="dash-cabecera dash-cabecera-accion">
+        <div>
+          <h1>Tus santuarios</h1>
+          <p>Crea, edita y administra cada santuario digital.</p>
+        </div>
+        <button class="btn" id="btnNuevoSantuario" type="button">+ Nuevo santuario</button>
+      </div>
+
+      <div class="dash-filtros">
+        <div class="dash-buscador">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" id="buscarSantuario" placeholder="Buscar por nombre…" />
+        </div>
+        <select id="filtroEstado">
+          <option value="">Todos los estados</option>
+          <option value="activo">Activos</option>
+          <option value="borrador">Borradores</option>
+          <option value="archivado">Archivados</option>
+        </select>
+      </div>
+
+      <div class="dash-santuarios-grid" id="santuariosGrid">
+        <div class="loading-row"><span class="spin"></span> Cargando santuarios…</div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== VISTA: EDITOR -->
+    <section id="vistaEditor" class="dash-vista">
+      <button class="dash-volver" id="btnVolverLista" type="button">&larr; Volver a santuarios</button>
+
+      <div class="editor-cabecera">
+        <div>
+          <h1 id="editorTitulo">Nuevo santuario</h1>
+          <p id="editorSlug" class="editor-slug"></p>
+        </div>
+        <div class="editor-acciones">
+          <span class="badge" id="editorEstadoBadge">borrador</span>
+          <a class="btn-ghost" id="btnVerPublico" href="#" target="_blank" rel="noopener">Ver santuario ↗</a>
+        </div>
+      </div>
+
+      <div class="editor-tabs" role="tablist">
+        <button class="editor-tab editor-tab-activo" data-tab="contenido" type="button" role="tab" aria-selected="true">Contenido</button>
+        <button class="editor-tab" data-tab="multimedia" type="button" role="tab" aria-selected="false">Multimedia</button>
+        <button class="editor-tab" data-tab="comentarios" type="button" role="tab" aria-selected="false">Comentarios</button>
+        <button class="editor-tab" data-tab="qr" type="button" role="tab" aria-selected="false">QR &amp; estadísticas</button>
+      </div>
+
+      <!-- ------------------------------------------------------------- TAB: CONTENIDO -->
+      <div class="editor-panel" data-panel="contenido">
+        <form id="formContenido" class="editor-form">
+          <div class="editor-form-grid">
+
+            <div class="campo campo-ancho">
+              <label for="cNombre">Nombre</label>
+              <input id="cNombre" name="nombre" type="text" placeholder="Ej: Toby, Abuela Rosa…" required />
+            </div>
+
+            <div class="campo campo-ancho">
+              <label for="cHistoria">Historia</label>
+              <textarea id="cHistoria" name="historia" rows="5" placeholder="Cuenta la historia que este santuario va a guardar…"></textarea>
+            </div>
+
+            <div class="campo">
+              <label for="cFecha">Fecha de conmemoración</label>
+              <input id="cFecha" name="fecha_conmemoracion" type="text" placeholder="Ej: 2014 – 2024" />
+            </div>
+
+            <div class="campo">
+              <label for="cCuidadoPor">Cuidado por</label>
+              <input id="cCuidadoPor" name="cuidado_por" type="text" placeholder="Ej: Familia Ramírez" />
+            </div>
+
+            <div class="campo">
+              <label for="cTipografia">Tipografía</label>
+              <select id="cTipografia" name="tipografia">
+                <option value="Fraunces">Fraunces (clásica, serif)</option>
+                <option value="Playfair Display">Playfair Display (elegante)</option>
+                <option value="Cormorant Garamond">Cormorant Garamond (suave)</option>
+                <option value="Lora">Lora (contemporánea)</option>
+              </select>
+            </div>
+
+            <div class="campo">
+              <label for="cPlantilla">Plantilla</label>
+              <select id="cPlantilla" name="plantilla">
+                <option value="clasico">Clásico</option>
+                <option value="floral">Floral</option>
+                <option value="minimal">Minimal</option>
+              </select>
+            </div>
+
+            <div class="campo">
+              <label for="cColorPrimario">Color principal</label>
+              <div class="campo-color">
+                <input type="color" id="cColorPrimario" name="color_primario_picker" value="#d3a34e" />
+                <input type="text" id="cColorPrimarioTexto" maxlength="7" placeholder="#d3a34e" />
+              </div>
+            </div>
+
+            <div class="campo">
+              <label for="cColorFondo">Color de fondo</label>
+              <div class="campo-color">
+                <input type="color" id="cColorFondo" name="color_fondo_picker" value="#130f1e" />
+                <input type="text" id="cColorFondoTexto" maxlength="7" placeholder="#130f1e" />
+              </div>
+            </div>
+
+            <div class="campo">
+              <label for="cLat">Latitud del mapa (opcional)</label>
+              <input id="cLat" name="mapa_lat" type="number" step="0.000001" placeholder="Ej: -12.046374" />
+            </div>
+
+            <div class="campo">
+              <label for="cLng">Longitud del mapa (opcional)</label>
+              <input id="cLng" name="mapa_lng" type="number" step="0.000001" placeholder="Ej: -77.042793" />
+            </div>
+
+            <div class="campo">
+              <label for="cEstado">Estado</label>
+              <select id="cEstado" name="estado">
+                <option value="borrador">Borrador (solo tú lo ves)</option>
+                <option value="activo">Activo</option>
+                <option value="archivado">Archivado</option>
+              </select>
+            </div>
+
+            <div class="campo campo-switch-wrap">
+              <label class="campo-switch">
+                <input type="checkbox" id="cPublicado" name="publicado" />
+                <span class="switch-visual"></span>
+                <span>Publicado (visible para quien tenga el enlace o el QR)</span>
+              </label>
+            </div>
+
+            <div class="campo campo-switch-wrap campo-ancho">
+              <label class="campo-switch">
+                <input type="checkbox" id="cComentarios" name="comentarios_activos" />
+                <span class="switch-visual"></span>
+                <span>Permitir que los visitantes dejen mensajes y fotos</span>
+              </label>
+            </div>
+
+          </div>
+
+          <div class="editor-form-acciones">
+            <button type="submit" class="btn" id="btnGuardarContenido">Guardar cambios</button>
+            <span class="editor-guardado" id="editorGuardadoTexto"></span>
+          </div>
+        </form>
+      </div>
+
+      <!-- ------------------------------------------------------------- TAB: MULTIMEDIA -->
+      <div class="editor-panel" data-panel="multimedia" hidden>
+
+        <div class="multimedia-portadas">
+          <div class="uploader-slot">
+            <h3>Portada</h3>
+            <p>Imagen ancha, se muestra arriba del santuario.</p>
+            <div class="uploader-caja" id="uploaderPortada" data-destino="cover" data-campo="portada_url">
+              <div class="uploader-vacio">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m21 16-5.5-5-4 4L9 13l-6 6"/></svg>
+                <span>Arrastra una imagen o haz clic</span>
+              </div>
+              <img class="uploader-preview" hidden alt="Vista previa de la portada" />
+              <input type="file" accept="image/*" hidden />
+            </div>
+          </div>
+
+          <div class="uploader-slot">
+            <h3>Foto principal</h3>
+            <p>El retrato central del amigurumi o la persona/mascota.</p>
+            <div class="uploader-caja uploader-caja-redonda" id="uploaderPrincipal" data-destino="cover" data-campo="foto_principal_url">
+              <div class="uploader-vacio">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.8-4 5-6 8-6s6.2 2 8 6"/></svg>
+                <span>Arrastra una foto o haz clic</span>
+              </div>
+              <img class="uploader-preview" hidden alt="Vista previa de la foto principal" />
+              <input type="file" accept="image/*" hidden />
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-panel-cabecera multimedia-galeria-cabecera">
+          <h2>Galería de recuerdos</h2>
+          <div class="multimedia-galeria-acciones">
+            <button class="btn-ghost" id="btnSubirRecuerdo" type="button">+ Subir foto / video / audio</button>
+            <button class="btn-ghost" id="btnAgregarFrase" type="button">+ Frase o evento</button>
+          </div>
+          <input type="file" id="inputRecuerdoArchivo" accept="image/*,video/*,audio/*" hidden />
+        </div>
+
+        <div class="recuerdos-grid" id="recuerdosGrid">
+          <div class="loading-row"><span class="spin"></span> Cargando galería…</div>
+        </div>
+      </div>
+
+      <!-- ------------------------------------------------------------- TAB: COMENTARIOS -->
+      <div class="editor-panel" data-panel="comentarios" hidden>
+        <div class="dash-panel-cabecera">
+          <h2>Mensajes de visitantes</h2>
+          <p>Aprueba, oculta o elimina lo que dejan quienes visitan este santuario.</p>
+        </div>
+        <div class="comentarios-lista" id="comentariosLista">
+          <div class="loading-row"><span class="spin"></span> Cargando comentarios…</div>
+        </div>
+      </div>
+
+      <!-- ------------------------------------------------------------- TAB: QR -->
+      <div class="editor-panel" data-panel="qr" hidden>
+        <div class="qr-layout">
+          <div class="qr-tarjeta tarjeta tarjeta-hilo">
+            <div id="qrDibujo" class="qr-dibujo"></div>
+            <p class="qr-url" id="qrUrlTexto"></p>
+            <div class="qr-acciones">
+              <button class="btn-ghost" id="btnCopiarLink" type="button">Copiar enlace</button>
+              <button class="btn-ghost" id="btnDescargarPng" type="button">Descargar PNG</button>
+              <button class="btn-ghost" id="btnDescargarSvg" type="button">Descargar SVG</button>
+              <button class="btn" id="btnCompartirQr" type="button">Compartir</button>
+            </div>
+          </div>
+          <div class="qr-stats tarjeta tarjeta-hilo">
+            <h3>Estadísticas</h3>
+            <div class="qr-stat-fila">
+              <span>Veces escaneado</span>
+              <strong id="qrVecesEscaneado">0</strong>
+            </div>
+            <div class="qr-stat-fila">
+              <span>Visitas totales</span>
+              <strong id="qrVisitasTotal">0</strong>
+            </div>
+            <div class="qr-stat-fila">
+              <span>Mensajes recibidos</span>
+              <strong id="qrComentariosTotal">0</strong>
+            </div>
+            <h4>Últimos 7 días</h4>
+            <div class="mini-chart" id="miniChart"></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+</div>
+
+<script type="module" src="/js/dashboard.js"></script>
+</body>
+</html>

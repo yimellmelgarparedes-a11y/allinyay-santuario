@@ -1,0 +1,921 @@
+/* =============================================================================
+   ALLINYAY · css/style.css
+   SISTEMA DE DISEÑO PREMIUM (REDISEÑO TOTAL VISUAL)
+   Inspiración: Apple, Stripe, Airbnb. Transmite Paz, Calidez, Amor y Memoria.
+   ============================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,450;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* -- Paleta de Colores: Lienzo de Algodón y Lila Espiritual -- */
+  --bg: #FAF8F5;              /* Crema natural, cálido y elegante */
+  --bg-alt: #F3ECE3;          /* Arena suave para secciones alternas */
+  --bg-elevada: #FFFFFF;      /* Blanco puro para tarjetas elevadas */
+  --surface: #FFFFFF;
+  --surface-hover: #F8F4EE;
+  --borde: rgba(124, 92, 159, 0.12); /* Sutil lila para los límites */
+  --borde-fuerte: rgba(124, 92, 159, 0.28);
+
+  /* Colores de Marca ALLINYAY */
+  --oro: #7C5C9F;             /* Lila espiritual/memoria que reemplaza el dorado pesado */
+  --oro-claro: #8E75AC;       /* Tono lila complementario suave */
+  --cera: #6E5143;            /* Café orgánico para contrastes selectos */
+  --crema: #3D2E26;           /* Textos: Marrón chocolate oscuro (suave, evita el negro clínico) */
+  --crema-dim: #5C4B41;       /* Textos secundarios con excelente contraste y calidez */
+  --crema-tenue: #8A766B;     /* Subtextos delicados */
+
+  --exito: #55B174;
+  --error: #D66B6B;
+  --info-bg: #EAE3F2;
+
+  /* -- Tipografía -- */
+  --f-display: 'Fraunces', ui-serif, Georgia, serif;
+  --f-cuerpo: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* -- Layout -- */
+  --ancho-maximo: 1200px;
+  --espacio-seccion: clamp(60px, 8vw, 110px); /* Reducción de espacios desperdiciados */
+  --radio: 20px;              /* Bordes más redondeados y amigables */
+  --radio-sm: 12px;
+  --sombra-vela: 0 10px 30px rgba(61, 46, 38, 0.04), 0 1px 3px rgba(61, 46, 38, 0.02);
+}
+
+/* =============================================================================
+   RESET Y BASE
+   ============================================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--crema);
+  font-family: var(--f-cuerpo);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg, video { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; margin: 0; padding: 0; }
+button { font-family: inherit; }
+
+h1, h2, h3, h4 {
+  font-family: var(--f-display);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+  color: var(--cera);
+  letter-spacing: -0.02em;
+}
+em { font-style: italic; color: var(--oro); }
+
+p { margin: 0; color: var(--crema-dim); }
+
+:focus-visible {
+  outline: 2px solid var(--oro);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.contenedor {
+  max-width: var(--ancho-maximo);
+  margin-inline: auto;
+  padding-inline: clamp(20px, 6vw, 40px);
+}
+
+.seccion { padding-block: var(--espacio-seccion); }
+.seccion-alt { background-color: var(--bg-alt); }
+
+/* Píldoras de categoría superiores (Kickers) */
+.ojo-brasa {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-cuerpo);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--oro);
+  margin-bottom: 12px;
+}
+.ojo-brasa::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--oro);
+  box-shadow: 0 0 8px 1px rgba(124, 92, 159, 0.4);
+}
+
+.titulo-seccion {
+  font-size: clamp(28px, 3.8vw, 42px);
+  max-width: 720px;
+  color: var(--cera);
+}
+.subtitulo-seccion {
+  margin-top: 14px;
+  max-width: 580px;
+  color: var(--crema-dim);
+  font-size: 16px;
+}
+.cabecera-seccion { margin-bottom: 44px; }
+.cabecera-seccion.centrada { margin-inline: auto; text-align: center; }
+.cabecera-seccion.centrada .titulo-seccion,
+.cabecera-seccion.centrada .subtitulo-seccion { margin-inline: auto; }
+
+/* =============================================================================
+   BOTONES PREMIUM
+   ============================================================================= */
+.btn, .btn-ghost, .btn-peligro {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+.btn {
+  background: var(--oro);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(124, 92, 159, 0.15);
+}
+.btn:hover {
+  transform: translateY(-1.5px);
+  background: var(--oro-claro);
+  box-shadow: 0 6px 20px rgba(124, 92, 159, 0.25);
+}
+.btn:active { transform: translateY(0); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--oro);
+  border-color: var(--borde-fuerte);
+}
+.btn-ghost:hover {
+  background: rgba(124, 92, 159, 0.05);
+  border-color: var(--oro);
+}
+
+.btn-peligro {
+  background: rgba(214, 107, 107, 0.08);
+  color: var(--error);
+  border-color: rgba(214, 107, 107, 0.25);
+}
+.btn-peligro:hover { background: rgba(214, 107, 107, 0.15); }
+
+.btn-block { width: 100%; }
+
+/* =============================================================================
+   TARJETAS MINIMALISTAS (Efecto Elevado / Apple)
+   ============================================================================= */
+.tarjeta {
+  position: relative;
+  background: var(--bg-elevada);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra-vela);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tarjeta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(61, 46, 38, 0.06);
+}
+
+/* Sutiles puntadas de hilo representativas arriba de las tarjetas */
+.tarjeta-hilo::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 24px; right: 24px;
+  height: 1px;
+  background-image: repeating-linear-gradient(90deg, var(--oro) 0 4px, transparent 4px 10px);
+  opacity: 0.25;
+}
+
+/* =============================================================================
+   NAVBAR MODERNA Y LIMPIA
+   ============================================================================= */
+.ay-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px clamp(20px, 6vw, 40px);
+  background: rgba(250, 248, 245, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--borde);
+}
+
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-mark {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 15px;
+  color: #FFFFFF;
+  background: var(--oro);
+  flex-shrink: 0;
+}
+.brand-name { font-family: var(--f-display); font-size: 16.5px; letter-spacing: -0.01em; color: var(--cera); }
+.brand-name b { font-weight: 600; color: var(--oro); }
+
+.ay-navbar-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2.4vw, 26px);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--crema-dim);
+}
+.ay-navbar-links a:not(.btn) { transition: color 0.2s ease; }
+.ay-navbar-links a:not(.btn):hover { color: var(--oro); }
+
+.ay-navbar-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+.ay-navbar-toggle span { width: 22px; height: 2px; background: var(--crema); border-radius: 2px; transition: transform 0.25s ease, opacity 0.25s ease; }
+
+.ay-navbar-derecha { display: flex; align-items: center; gap: 14px; }
+.ay-navbar-usuario { font-size: 13.5px; color: var(--crema-dim); }
+
+.candle { width: 20px; height: 30px; }
+.candle .flame { animation: parpadeoVela 3.2s ease-in-out infinite; transform-origin: 10px 6px; fill: var(--oro-claro); }
+
+@media (max-width: 760px) {
+  .ay-navbar-toggle { display: flex; }
+  .ay-navbar-links {
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--bg-elevada);
+    border-bottom: 1px solid var(--borde);
+    padding: 10px 24px 22px;
+    gap: 4px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .ay-navbar-links a { padding: 12px 4px; border-bottom: 1px solid rgba(124, 92, 159, 0.05); color: var(--crema); }
+  .ay-navbar-links-abierto { max-height: 420px; }
+  .ay-navbar-links .btn { margin-top: 8px; text-align: center; }
+}
+
+/* =============================================================================
+   HERO PREMIUM (SIN ESPACIOS DESPERDICIADOS)
+   ============================================================================= */
+.hero {
+  position: relative;
+  overflow: clip;
+  padding-block: clamp(40px, 8vw, 80px);
+}
+.hero-resplandor {
+  position: absolute;
+  inset: -10% -10% auto -10%;
+  height: 600px;
+  background: radial-gradient(closest-side, rgba(124, 92, 159, 0.06), transparent 70%);
+  pointer-events: none;
+}
+.hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(30px, 5vw, 50px);
+  align-items: center;
+}
+.hero-kicker { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.hero h1 {
+  font-size: clamp(34px, 4.8vw, 56px);
+  color: var(--cera);
+  letter-spacing: -0.03em;
+}
+.hero-copy {
+  margin-top: 18px;
+  max-width: 480px;
+  color: var(--crema-dim);
+  font-size: 16px;
+  line-height: 1.65;
+}
+.hero-acciones { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.hero-metrica { display: flex; gap: 28px; margin-top: 40px; }
+.hero-metrica div strong { display: block; font-family: var(--f-display); font-size: 24px; color: var(--oro); }
+.hero-metrica div span { font-size: 13px; color: var(--crema-tenue); }
+
+/* Lado derecho del Hero: Escena moderna limpia del Amigurumi */
+.hero-escena { position: relative; display: grid; place-items: center; }
+.hero-vela-grande { 
+  width: min(240px, 60vw); 
+  filter: drop-shadow(0 20px 40px rgba(124, 92, 159, 0.12)); 
+}
+.hero-vela-grande rect { fill: var(--bg-alt); }
+.hero-vela-grande .flame-grande { animation: parpadeoVela 3.6s ease-in-out infinite; transform-origin: 100px 60px; fill: var(--oro-claro); }
+.hero-anillo {
+  position: absolute;
+  inset: 5%;
+  border: 1.5px dashed var(--borde-fuerte);
+  border-radius: 50%;
+  animation: giroLento 80s linear infinite;
+  opacity: 0.6;
+}
+
+@media (max-width: 880px) {
+  .hero-grid { grid-template-columns: 1fr; text-align: left; }
+  .hero-metrica { gap: 20px; flex-wrap: wrap; }
+}
+
+/* =============================================================================
+   HILVÁN DE COSTURA (Suave y Sutil)
+   ============================================================================= */
+.hilvan {
+  width: 100%;
+  height: 20px;
+  display: block;
+  margin-inline: auto;
+  opacity: 0.35;
+}
+.hilvan path {
+  fill: none;
+  stroke: var(--oro-claro);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-dasharray: 8 10;
+}
+
+/* =============================================================================
+   HISTORIA
+   ============================================================================= */
+.historia-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(30px, 5vw, 60px);
+  align-items: center;
+}
+.historia-marco {
+  aspect-ratio: 4/5;
+  border-radius: var(--radio);
+  border: 1px solid var(--borde);
+  background: var(--bg-alt);
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--sombra-vela);
+}
+.historia-marco svg { width: 50%; }
+.historia-marco path { fill: var(--oro); }
+.historia-marco::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(90deg, transparent 0 20px, rgba(124, 92, 159, 0.02) 20px 21px);
+}
+.historia-texto p + p { margin-top: 14px; color: var(--crema-dim); }
+.historia-texto p:first-of-type { color: var(--crema); font-size: 17px; font-weight: 500; }
+@media (max-width: 820px) { .historia-grid { grid-template-columns: 1fr; } .historia-marco { max-width: 280px; margin-inline: auto; } }
+
+/* =============================================================================
+   PROCESO (Cómo Funciona: De Amigurumi a Santuario QR)
+   ============================================================================= */
+.proceso-lista { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.proceso-paso {
+  padding: 24px;
+  background: var(--bg-elevada);
+}
+.proceso-num {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--oro);
+}
+.proceso-paso h3 { font-size: 18px; margin-top: 10px; font-weight: 500; color: var(--cera); }
+.proceso-paso p { margin-top: 8px; color: var(--crema-dim); font-size: 13.5px; line-height: 1.5; }
+.proceso-paso:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 36px; right: -11px;
+  width: 20px; height: 1px;
+  background-image: repeating-linear-gradient(90deg, var(--oro-claro) 0 4px, transparent 4px 8px);
+  display: none;
+}
+@media (min-width: 900px) { .proceso-paso:not(:last-child)::after { display: block; opacity: 0.5; } }
+@media (max-width: 900px) { .proceso-lista { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .proceso-lista { grid-template-columns: 1fr; } }
+
+/* =============================================================================
+   BENEFICIOS
+   ============================================================================= */
+.beneficios-lista { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.beneficio { padding: 24px; }
+.beneficio-icono {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  display: grid; place-items: center;
+  background: rgba(124, 92, 159, 0.08);
+  border: 1px solid var(--borde);
+  color: var(--oro);
+  margin-bottom: 14px;
+}
+.beneficio h3 { font-size: 16.5px; font-weight: 500; color: var(--cera); }
+.beneficio p { margin-top: 6px; color: var(--crema-dim); font-size: 13.5px; }
+@media (max-width: 900px) { .beneficios-lista { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .beneficios-lista { grid-template-columns: 1fr; } }
+
+/* =============================================================================
+   GALERÍA PREMIUM MASONRY
+   ============================================================================= */
+.galeria-masonry {
+  column-count: 3;
+  column-gap: 16px;
+}
+.memory-card {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  border-radius: var(--radio-sm);
+  overflow: hidden;
+  border: 1px solid var(--borde);
+  background: var(--bg-elevada);
+  cursor: pointer;
+  position: relative;
+  box-shadow: var(--sombra-vela);
+  transition: all 0.25s ease;
+}
+.memory-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(61, 46, 38, 0.05); }
+.memory-media {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--oro);
+  background: var(--bg-alt);
+}
+.memory-body { padding: 12px 14px; }
+.memory-body h4 { font-size: 14px; font-weight: 500; color: var(--crema); }
+.memory-body span { font-size: 12px; color: var(--crema-tenue); }
+.memory-card:hover .memory-media svg { transform: scale(1.05); }
+.memory-media svg { transition: transform 0.4s ease; }
+
+/* Skeletons */
+.skeleton-card { pointer-events: none; }
+.skeleton-block {
+  background: linear-gradient(90deg, rgba(61,46,38,0.03) 25%, rgba(61,46,38,0.06) 37%, rgba(61,46,38,0.03) 63%);
+  background-size: 400% 100%;
+  animation: brilloSkeleton 1.6s ease infinite;
+  border-radius: 6px;
+}
+.skeleton-media { height: 160px; border-radius: 0; }
+.skeleton-linea { height: 11px; margin-top: 8px; }
+
+@media (max-width: 900px) { .galeria-masonry { column-count: 2; } }
+@media (max-width: 560px) { .galeria-masonry { column-count: 1; } }
+
+.galeria-nota {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--crema-tenue);
+  text-align: center;
+}
+
+/* =============================================================================
+   TESTIMONIOS
+   ============================================================================= */
+.testimonios-pista {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--borde-fuerte) transparent;
+}
+.testimonio {
+  scroll-snap-align: start;
+  flex: 0 0 min(360px, 82vw);
+  padding: 24px;
+}
+.testimonio-cita { font-size: 14.5px; color: var(--crema-dim); line-height: 1.6; }
+.testimonio-quien { display: flex; align-items: center; gap: 10px; margin-top: 18px; }
+.testimonio-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(124,92,159,0.1);
+  color: var(--oro);
+  font-family: var(--f-display);
+  font-size: 14px;
+  font-weight: 600;
+}
+.testimonio-quien strong { display: block; font-size: 13.5px; font-weight: 600; color: var(--crema); }
+.testimonio-quien span { font-size: 11.5px; color: var(--crema-tenue); }
+
+/* =============================================================================
+   FAQ
+   ============================================================================= */
+.faq-lista { max-width: 720px; margin-inline: auto; display: flex; flex-direction: column; gap: 10px; }
+.faq-item { padding: 4px 20px; }
+.faq-pregunta {
+  width: 100%;
+  background: none; border: none;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  cursor: pointer;
+  color: var(--crema);
+  font-size: 15px;
+  font-weight: 500;
+  text-align: left;
+}
+.faq-mas { flex-shrink: 0; width: 16px; height: 16px; position: relative; }
+.faq-mas::before, .faq-mas::after {
+  content: '';
+  background: var(--oro);
+  position: absolute; border-radius: 2px; transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.faq-mas::before { top: 50%; left: 0; width: 100%; height: 2px; margin-top: -1px; }
+.faq-mas::after { left: 50%; top: 0; height: 100%; width: 2px; margin-left: -1px; }
+.faq-item[data-abierto="true"] .faq-mas::after { transform: rotate(90deg); opacity: 0; }
+.faq-respuesta {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  color: var(--crema-dim);
+  font-size: 14px;
+}
+.faq-respuesta p { padding-bottom: 16px; }
+.faq-item[data-abierto="true"] .faq-respuesta { max-height: 240px; }
+
+/* =============================================================================
+   CONTACTO
+   ============================================================================= */
+.contacto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 48px); align-items: start; }
+.contacto-info h3 { font-size: 20px; font-weight: 500; color: var(--cera); }
+.contacto-info p { margin-top: 10px; color: var(--crema-dim); font-size: 14.5px; max-width: 400px; }
+.contacto-dato { display: flex; align-items: center; gap: 10px; margin-top: 16px; font-size: 14px; color: var(--crema); }
+.contacto-dato svg { stroke: var(--oro); }
+.contacto-form { padding: 24px; display: grid; gap: 14px; }
+.campo { display: grid; gap: 6px; }
+.campo label { font-size: 12.5px; color: var(--crema-dim); font-weight: 500; }
+.campo input, .campo textarea {
+  background: #FFFFFF;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: var(--crema);
+  font-family: var(--f-cuerpo);
+  font-size: 14px;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+.campo input:focus, .campo textarea:focus { border-color: var(--oro); outline: none; }
+.campo input::placeholder, .campo textarea::placeholder { color: var(--crema-tenue); }
+@media (max-width: 820px) { .contacto-grid { grid-template-columns: 1fr; } }
+
+/* =============================================================================
+   FOOTER (Elegante y Sutil)
+   ============================================================================= */
+.foot { padding-top: 10px; padding-bottom: 30px; border-top: 1px solid var(--borde); }
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 28px;
+  padding: 36px 0 24px;
+}
+.foot-marca { display: flex; flex-direction: column; gap: 10px; max-width: 260px; }
+.foot-marca p { font-size: 13px; color: var(--crema-tenue); }
+.foot-col h5 { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--oro); font-weight: 700; margin-bottom: 10px; }
+.foot-col { display: flex; flex-direction: column; gap: 8px; }
+.foot-col a { font-size: 13.5px; color: var(--crema-dim); transition: color 0.2s ease; }
+.foot-col a:hover { color: var(--oro); }
+.foot-copy { font-size: 12px; color: var(--crema-tenue); text-align: center; padding-top: 16px; border-top: 1.5px dashed var(--borde); }
+.foot-minimo p { text-align: center; font-size: 12px; color: var(--crema-tenue); padding-top: 14px; }
+@media (max-width: 820px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .foot-grid { grid-template-columns: 1fr; } }
+
+/* =============================================================================
+   AUTENTICACIÓN (login.html)
+   ============================================================================= */
+.auth-pantalla {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+}
+
+.auth-panel {
+  position: relative;
+  overflow: clip;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(24px, 4vw, 48px);
+  background:
+    radial-gradient(560px 420px at 20% 15%, rgba(124, 92, 159, 0.06), transparent 65%),
+    var(--bg-alt);
+  border-right: 1px solid var(--borde);
+}
+.auth-panel-vela { margin: auto; width: min(200px, 60%); }
+.auth-panel-vela rect { fill: var(--bg); }
+.auth-panel-vela .flame-grande { animation: parpadeoVela 3.6s ease-in-out infinite; transform-origin: 100px 60px; fill: var(--oro); }
+.auth-panel-cita {
+  max-width: 380px;
+  font-family: var(--f-display);
+  font-size: 19px;
+  font-style: italic;
+  color: var(--cera);
+  line-height: 1.4;
+}
+.auth-panel-cita span { display: block; margin-top: 10px; font-family: var(--f-cuerpo); font-style: normal; font-size: 12px; color: var(--crema-tenue); }
+
+.auth-form-lado {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(24px, 6vw, 64px);
+  background: #FFFFFF;
+}
+.auth-form-wrap { width: 100%; max-width: 360px; margin-inline: auto; }
+.auth-volver { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--crema-tenue); margin-bottom: 24px; }
+.auth-volver:hover { color: var(--oro); }
+.auth-form-wrap h1 { font-size: 24px; color: var(--cera); }
+.auth-form-wrap > p { margin-top: 8px; color: var(--crema-dim); font-size: 14px; }
+.auth-form { margin-top: 24px; display: grid; gap: 16px; }
+.campo-clave { position: relative; }
+.campo-clave button {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  color: var(--crema-tenue); padding: 8px;
+  display: grid; place-items: center;
+}
+.campo-clave button:hover { color: var(--oro); }
+.campo-clave input { padding-right: 42px; width: 100%; }
+.auth-error {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(214, 107, 107, 0.08);
+  border: 1px solid rgba(214, 107, 107, 0.2);
+  color: var(--error);
+  font-size: 13px;
+}
+.auth-error.visible { display: flex; }
+.auth-pie { margin-top: 22px; text-align: center; font-size: 12px; color: var(--crema-tenue); }
+.auth-pie a { color: var(--oro); font-weight: 500; }
+
+@media (max-width: 880px) {
+  .auth-pantalla { grid-template-columns: 1fr; }
+  .auth-panel { display: none; }
+}
+
+/* =============================================================================
+   ESTADOS VACÍOS / ERROR
+   ============================================================================= */
+.estado-vacio {
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--crema-tenue);
+}
+.estado-vacio svg { width: 38px; margin-inline: auto; margin-bottom: 12px; color: var(--oro); opacity: 0.8; }
+.estado-vacio h4 { font-size: 15px; color: var(--crema); font-weight: 500; }
+.estado-vacio p { margin-top: 4px; font-size: 13px; }
+
+/* =============================================================================
+   MODALES PREMIUM (Alineación Limpia)
+   ============================================================================= */
+.ay-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(61, 46, 38, 0.15);
+  backdrop-filter: blur(8px);
+  display: grid; place-items: center;
+  z-index: 1000;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.ay-modal-overlay.ay-modal-visible { opacity: 1; }
+.ay-modal-overlay.ay-modal-cerrando { opacity: 0; }
+.ay-modal {
+  width: min(440px, 100%);
+  background: #FFFFFF;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: 0 20px 50px rgba(61, 46, 38, 0.08);
+  transform: translateY(10px) scale(0.98);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ay-modal-overlay.ay-modal-visible .ay-modal { transform: translateY(0) scale(1); }
+.ay-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 22px 0; }
+.ay-modal-header h3 { font-size: 17px; font-weight: 600; color: var(--cera); }
+.ay-modal-cerrar { background: none; border: none; color: var(--crema-dim); font-size: 20px; cursor: pointer; line-height: 1; padding: 4px; }
+.ay-modal-body { padding: 14px 22px; color: var(--crema-dim); font-size: 14px; }
+.ay-modal-footer { display: flex; justify-content: flex-end; gap: 8px; padding: 0 22px 22px; }
+
+/* =============================================================================
+   LOADING (Efectos de Carga sutiles)
+   ============================================================================= */
+.loading-row { display: flex; align-items: center; gap: 8px; color: var(--crema-dim); font-size: 13.5px; padding: 12px 0; }
+.spin {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(124, 92, 159, 0.15);
+  border-top-color: var(--oro);
+  animation: girar 0.8s linear infinite;
+}
+.ay-progreso { height: 5px; border-radius: 999px; background: var(--bg-alt); overflow: hidden; }
+.ay-progreso-barra { height: 100%; background: var(--oro); transition: width 0.25s ease; }
+
+/* =============================================================================
+   SANTUARIO PÚBLICO (santuario.html) — REDISEÑO DEL TEMPLATE M tenant
+   ============================================================================= */
+
+.san-header {
+  position: sticky; top: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px clamp(16px, 5vw, 36px);
+  background: rgba(250, 248, 245, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--borde);
+}
+.san-header-marca { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--crema-dim); font-weight: 500; }
+.san-header-marca .brand-mark { width: 26px; height: 26px; font-size: 12px; border-radius: 6px; }
+.san-header-acciones { display: flex; align-items: center; gap: 6px; }
+.san-header-acciones button {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: #FFFFFF; border: 1px solid var(--borde-fuerte);
+  color: var(--crema); display: grid; place-items: center; cursor: pointer;
+  transition: all 0.2s ease;
+}
+.san-header-acciones button:hover { border-color: var(--oro); color: var(--oro); background: var(--surface-hover); }
+
+.san-pantalla-estado { min-height: 80vh; display: grid; place-items: center; padding: 40px 20px; text-align: center; }
+
+/* Rediseño de la Portada del Santuario */
+.san-portada {
+  position: relative;
+  height: clamp(200px, 35vw, 380px);
+  background: linear-gradient(180deg, rgba(250,248,245,0) 30%, var(--bg) 100%), linear-gradient(160deg, var(--bg-alt), #E2D9CE);
+  background-size: cover; background-position: center;
+  overflow: clip;
+}
+.san-portada-velo { position: absolute; inset: 0; background: radial-gradient(closest-side, rgba(124, 92, 159, 0.05), transparent 70%); pointer-events: none; }
+.san-retrato-wrap { display: flex; justify-content: center; margin-top: -64px; position: relative; z-index: 2; }
+.san-retrato {
+  width: 128px; height: 128px; border-radius: 50%;
+  border: 4px solid var(--bg);
+  box-shadow: 0 10px 25px rgba(61, 46, 38, 0.08);
+  object-fit: cover;
+  background: var(--bg-alt);
+}
+.san-retrato-vacio { display: grid; place-items: center; color: var(--oro); }
+
+.san-identidad { text-align: center; padding: 18px 20px 0; }
+.san-identidad h1 { font-size: clamp(26px, 4vw, 38px); color: var(--cera); }
+.san-identidad .san-fechas { margin-top: 8px; color: var(--oro); font-size: 14px; font-weight: 600; letter-spacing: 0.02em; }
+.san-identidad .san-cuidado { margin-top: 4px; color: var(--crema-tenue); font-size: 13px; }
+.san-identidad-acciones { display: flex; justify-content: center; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+
+.san-historia { max-width: 620px; margin-inline: auto; text-align: center; padding: 0 20px; }
+.san-historia p { color: var(--crema-dim); font-size: 15.5px; white-space: pre-line; line-height: 1.7; }
+
+/* Tarjeta de Recuerdo Destacada del Santuario */
+.san-destacado { max-width: 600px; margin-inline: auto; padding: 24px; text-align: center; background: #FFFFFF; }
+.san-destacado span.ojo-brasa { justify-content: center; }
+.san-destacado blockquote { font-family: var(--f-display); font-style: italic; font-size: 19px; color: var(--crema); line-height: 1.5; margin: 0; }
+
+/* Línea de Tiempo de Recuerdos (Timeline) */
+.san-timeline { display: grid; gap: 20px; max-width: 680px; margin-inline: auto; }
+.san-timeline-item {
+  display: grid; grid-template-columns: 76px 1fr; gap: 14px;
+  position: relative;
+}
+.san-timeline-item::before {
+  content: ''; position: absolute; left: 37px; top: 24px; bottom: -22px; width: 1px;
+  background-image: repeating-linear-gradient(180deg, var(--borde-fuerte) 0 4px, transparent 4px 8px);
+}
+.san-timeline-item:last-child::before { display: none; }
+.san-timeline-fecha { text-align: right; font-size: 12px; color: var(--crema-tenue); padding-top: 4px; font-weight: 500; }
+.san-timeline-cuerpo { padding-bottom: 4px; }
+.san-timeline-cuerpo h4 { font-size: 15px; font-weight: 600; color: var(--crema); }
+.san-timeline-cuerpo p { margin-top: 4px; color: var(--crema-dim); font-size: 13.5px; }
+
+.san-galeria-media { width: 100%; height: 100%; object-fit: cover; display: block; }
+.san-galeria-video-marca, .san-galeria-audio-marca {
+  position: absolute; top: 8px; right: 8px;
+  width: 24px; height: 24px; border-radius: 6px;
+  background: rgba(250,248,245,0.85); color: var(--oro);
+  display: grid; place-items: center;
+}
+.san-audio-tile { padding: 18px 14px; display: grid; place-items: center; gap: 8px; text-align: center; min-height: 120px; }
+.san-audio-tile svg { color: var(--oro); }
+
+/* Lightbox de Contenido Multimedia */
+.san-lightbox {
+  position: fixed; inset: 0; z-index: 1200;
+  background: rgba(61, 46, 38, 0.95);
+  display: grid; place-items: center;
+  padding: 24px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+.san-lightbox.san-lightbox-abierto { opacity: 1; pointer-events: auto; }
+.san-lightbox-contenido { max-width: min(840px, 92vw); max-height: 84vh; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.san-lightbox-contenido img, .san-lightbox-contenido video { max-width: 100%; max-height: 70vh; border-radius: var(--radio-sm); box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+.san-lightbox-audio { width: min(440px, 90vw); }
+.san-lightbox-pie { color: #EAE3DB; font-size: 13.5px; text-align: center; }
+.san-lightbox-cerrar, .san-lightbox-prev, .san-lightbox-next {
+  position: absolute; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25);
+  color: #FFFFFF; border-radius: 999px; cursor: pointer; display: grid; place-items: center;
+  transition: all 0.2s ease;
+}
+.san-lightbox-cerrar { top: 20px; right: 20px; width: 36px; height: 36px; }
+.san-lightbox-prev, .san-lightbox-next { top: 50%; transform: translateY(-50%); width: 40px; height: 40px; }
+.san-lightbox-prev { left: 16px; }
+.san-lightbox-next { right: 16px; }
+.san-lightbox-cerrar:hover, .san-lightbox-prev:hover, .san-lightbox-next:hover { background: var(--oro); border-color: var(--oro); }
+
+/* Reproductor de Audio */
+.san-audio-player { display: flex; align-items: center; gap: 12px; padding: 12px 14px; }
+.san-audio-boton {
+  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+  background: var(--oro); color: #FFFFFF;
+  border: none; cursor: pointer; display: grid; place-items: center;
+}
+.san-audio-onda { flex: 1; display: flex; align-items: center; gap: 2px; height: 28px; }
+.san-audio-onda span { flex: 1; background: var(--borde-fuerte); border-radius: 2px; min-height: 2px; transition: background 0.2s ease; }
+.san-audio-onda span.san-onda-activa { background: var(--oro); }
+.san-audio-tiempo { font-size: 11px; color: var(--crema-tenue); flex-shrink: 0; font-variant-numeric: tabular-nums; }
+.san-audio-velocidad { background: var(--bg-alt); border: 1px solid var(--borde); color: var(--crema-dim); border-radius: 6px; font-size: 11px; padding: 4px 6px; cursor: pointer; }
+
+.san-mapa { border-radius: var(--radio); overflow: hidden; height: 280px; border: 1px solid var(--borde); }
+.san-mapa iframe { width: 100%; height: 100%; border: 0; filter: contrast(0.95); }
+
+/* Mensajes de Visitantes en Santuario */
+.san-mensajes-lista { display: grid; gap: 12px; max-width: 620px; margin-inline: auto; }
+.san-mensaje { padding: 16px 20px; background: #FFFFFF; }
+.san-mensaje-cabecera { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.san-mensaje-avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(124, 92, 159, 0.1); color: var(--oro); display: grid; place-items: center; font-family: var(--f-display); font-size: 12px; font-weight: 600; flex-shrink: 0; }
+.san-mensaje-cabecera strong { font-size: 13.5px; color: var(--crema); }
+.san-mensaje-cabecera span { font-size: 11.5px; color: var(--crema-tenue); margin-left: auto; }
+.san-mensaje p { color: var(--crema-dim); font-size: 13.5px; }
+.san-mensaje img { margin-top: 8px; border-radius: 8px; max-height: 180px; object-fit: cover; }
+
+.san-form-mensaje { max-width: 620px; margin: 0 auto 30px; padding: 22px; display: grid; gap: 12px; background: #FFFFFF; }
+.san-form-adjunto { display: flex; align-items: center; gap: 8px; }
+.san-form-adjunto-preview { width: 38px; height: 38px; border-radius: 6px; object-fit: cover; display: none; }
+.san-comentarios-cerrados { text-align: center; color: var(--crema-tenue); font-size: 13px; padding: 24px 20px; }
+
+.san-compartir-menu { display: grid; gap: 8px; }
+.san-compartir-menu a, .san-compartir-menu button {
+  display: flex; align-items: center; gap: 8px; padding: 10px 12px;
+  background: #FFFFFF; border: 1px solid var(--borde); border-radius: 8px;
+  color: var(--crema); font-size: 13.5px; cursor: pointer; width: 100%; text-align: left;
+}
+.san-compartir-menu a:hover, .san-compartir-menu button:hover { border-color: var(--oro); background: var(--surface-hover); }
+
+.san-cuerpo-fullscreen .san-header,
+.san-cuerpo-fullscreen .foot { display: none; }
+.san-cuerpo-fullscreen .san-portada { height: 100vh; }
+.san-cuerpo-fullscreen .san-retrato-wrap { margin-top: -64px; }
+
+@media (max-width: 640px) {
+  .san-timeline-item { grid-template-columns: 48px 1fr; gap: 10px; }
+  .san-timeline-item::before { left: 23px; }
+  .san-timeline-fecha { font-size: 10.5px; }
+}
+
+/* =============================================================================
+   ANIMACIONES DE ALTA CALIDAD (animations.css define la velocidad de entrada)
+   ============================================================================= */
+@keyframes parpadeoVela {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.95; }
+  50% { transform: scale(1.05) rotate(1.5deg); opacity: 1; }
+}
+@keyframes giroLento {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes brilloSkeleton {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}

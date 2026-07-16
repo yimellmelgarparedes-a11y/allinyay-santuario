@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title id="tituloPagina">Santuario digital · ALLINYAY</title>
+<meta id="metaDescripcion" name="description" content="Un santuario digital ALLINYAY: fotos, historia y mensajes guardados para siempre." />
+<meta name="robots" content="index, follow" />
+
+<!-- Open Graph (se completan dinámicamente con los datos del santuario) -->
+<meta id="ogTitulo" property="og:type" content="website" />
+<meta property="og:site_name" content="ALLINYAY" />
+<meta id="ogTitle" property="og:title" content="Santuario digital · ALLINYAY" />
+<meta id="ogDescription" property="og:description" content="Un santuario digital ALLINYAY." />
+<meta id="ogImage" property="og:image" content="/assets/backgrounds/og-cover.jpg" />
+<meta property="og:locale" content="es_PE" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta id="twitterTitle" name="twitter:title" content="Santuario digital · ALLINYAY" />
+<meta id="twitterDescription" name="twitter:description" content="Un santuario digital ALLINYAY." />
+<meta id="twitterImage" name="twitter:image" content="/assets/backgrounds/og-cover.jpg" />
+
+<link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/animations.css" />
+
+<script type="application/ld+json" id="schemaJson">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Santuario digital ALLINYAY"
+}
+</script>
+</head>
+<body id="cuerpoSantuario">
+
+<!-- ===================================================================== HEADER MÍNIMO -->
+<header class="san-header">
+  <a class="san-header-marca" href="/index.html">
+    <div class="brand-mark">A</div>
+    <span>Un santuario ALLINYAY</span>
+  </a>
+  <div class="san-header-acciones">
+    <button id="btnCompartir" type="button" aria-label="Compartir santuario">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-3.9M8.6 13.5l6.8 3.9"/></svg>
+    </button>
+    <button id="btnPantallaCompleta" type="button" aria-label="Pantalla completa">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ===================================================================== ESTADO: CARGANDO -->
+<div id="estadoCargando" class="san-pantalla-estado">
+  <div class="loading-row"><span class="spin"></span> Abriendo el santuario…</div>
+</div>
+
+<!-- ===================================================================== ESTADO: NO ENCONTRADO -->
+<div id="estadoNoEncontrado" class="san-pantalla-estado" hidden>
+  <div class="estado-vacio">
+    <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3c2 3-1 4-1 6.5a2.5 2.5 0 0 0 5 0c0-1.5-1-2.5-1-2.5s1.6 2.2 1.6 4.5a4.1 4.1 0 0 1-8.2 0c0-4.7 3.6-5.3 3.6-8.5z"/><path d="M4 21c1.6-2 4-3 8-3s6.4 1 8 3"/></svg>
+    <h4>No encontramos este santuario</h4>
+    <p>El enlace o el código QR podrían estar mal escritos, o el santuario aún no está publicado.</p>
+    <a class="btn" style="margin-top:20px" href="/index.html">Volver al inicio</a>
+  </div>
+</div>
+
+<!-- ===================================================================== CONTENIDO DEL SANTUARIO -->
+<main id="contenidoSantuario" hidden>
+
+  <!-- -------------------------------------------------------------- PORTADA + RETRATO -->
+  <div class="san-portada" id="sanPortada">
+    <div class="san-portada-velo" aria-hidden="true"></div>
+  </div>
+  <div class="san-retrato-wrap">
+    <img id="sanRetrato" class="san-retrato" hidden alt="" />
+    <div id="sanRetratoVacio" class="san-retrato san-retrato-vacio" aria-hidden="true">
+      <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3c2 3-1 4-1 6.5a2.5 2.5 0 0 0 5 0c0-1.5-1-2.5-1-2.5s1.6 2.2 1.6 4.5a4.1 4.1 0 0 1-8.2 0c0-4.7 3.6-5.3 3.6-8.5z"/></svg>
+    </div>
+  </div>
+
+  <!-- -------------------------------------------------------------- IDENTIDAD -->
+  <section class="san-identidad revelar">
+    <h1 id="sanNombre">Cargando…</h1>
+    <p id="sanFechas" class="san-fechas" hidden></p>
+    <p id="sanCuidado" class="san-cuidado" hidden></p>
+    <div class="san-identidad-acciones">
+      <button class="btn-ghost" id="btnIrMensajes" type="button">Dejar un mensaje</button>
+      <button class="btn-ghost" id="btnCompartir2" type="button">Compartir</button>
+    </div>
+  </section>
+
+  <svg class="hilvan" viewBox="0 0 1180 28" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 14 Q 40 0, 80 14 T 160 14 T 240 14 T 320 14 T 400 14 T 480 14 T 560 14 T 640 14 T 720 14 T 800 14 T 880 14 T 960 14 T 1040 14 T 1120 14 T 1180 14"/>
+  </svg>
+
+  <!-- -------------------------------------------------------------- HISTORIA -->
+  <section class="seccion" id="sanSeccionHistoria" hidden>
+    <div class="san-historia revelar">
+      <span class="ojo-brasa" style="justify-content:center">Su historia</span>
+      <p id="sanHistoria"></p>
+    </div>
+  </section>
+
+  <!-- -------------------------------------------------------------- RECUERDO DESTACADO -->
+  <section id="sanSeccionDestacado" hidden>
+    <div class="contenedor">
+      <div class="san-destacado tarjeta tarjeta-hilo revelar">
+        <span class="ojo-brasa">Un recuerdo especial</span>
+        <blockquote id="sanDestacadoTexto"></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <svg class="hilvan" viewBox="0 0 1180 28" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 14 Q 40 0, 80 14 T 160 14 T 240 14 T 320 14 T 400 14 T 480 14 T 560 14 T 640 14 T 720 14 T 800 14 T 880 14 T 960 14 T 1040 14 T 1120 14 T 1180 14"/>
+  </svg>
+
+  <!-- -------------------------------------------------------------- GALERÍA -->
+  <section class="seccion seccion-alt" id="sanSeccionGaleria">
+    <div class="contenedor">
+      <div class="cabecera-seccion centrada revelar">
+        <span class="ojo-brasa">Galería</span>
+        <h2 class="titulo-seccion">Fotos, videos y audios</h2>
+      </div>
+      <div id="sanGaleria" class="galeria-masonry revelar"></div>
+    </div>
+  </section>
+
+  <svg class="hilvan" viewBox="0 0 1180 28" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 14 Q 40 0, 80 14 T 160 14 T 240 14 T 320 14 T 400 14 T 480 14 T 560 14 T 640 14 T 720 14 T 800 14 T 880 14 T 960 14 T 1040 14 T 1120 14 T 1180 14"/>
+  </svg>
+
+  <!-- -------------------------------------------------------------- TIMELINE (frases y eventos) -->
+  <section class="seccion" id="sanSeccionTimeline" hidden>
+    <div class="contenedor">
+      <div class="cabecera-seccion centrada revelar">
+        <span class="ojo-brasa">Momentos</span>
+        <h2 class="titulo-seccion">Frases y fechas para recordar</h2>
+      </div>
+      <div id="sanTimeline" class="san-timeline revelar"></div>
+    </div>
+  </section>
+
+  <svg class="hilvan" viewBox="0 0 1180 28" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 14 Q 40 0, 80 14 T 160 14 T 240 14 T 320 14 T 400 14 T 480 14 T 560 14 T 640 14 T 720 14 T 800 14 T 880 14 T 960 14 T 1040 14 T 1120 14 T 1180 14"/>
+  </svg>
+
+  <!-- -------------------------------------------------------------- MAPA -->
+  <section class="seccion seccion-alt" id="sanSeccionMapa" hidden>
+    <div class="contenedor">
+      <div class="cabecera-seccion centrada revelar">
+        <span class="ojo-brasa">Lugar</span>
+        <h2 class="titulo-seccion">Un lugar que también forma parte de la historia</h2>
+      </div>
+      <div class="san-mapa revelar">
+        <iframe id="sanMapaIframe" title="Ubicación" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <svg class="hilvan" viewBox="0 0 1180 28" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 14 Q 40 0, 80 14 T 160 14 T 240 14 T 320 14 T 400 14 T 480 14 T 560 14 T 640 14 T 720 14 T 800 14 T 880 14 T 960 14 T 1040 14 T 1120 14 T 1180 14"/>
+  </svg>
+
+  <!-- -------------------------------------------------------------- MENSAJES DE VISITANTES -->
+  <section class="seccion" id="sanSeccionMensajes">
+    <div class="contenedor">
+      <div class="cabecera-seccion centrada revelar">
+        <span class="ojo-brasa">Mensajes</span>
+        <h2 class="titulo-seccion">Palabras de quienes lo recuerdan</h2>
+        <p class="subtitulo-seccion">Cada mensaje se revisa antes de publicarse, para que este espacio siga siendo un homenaje.</p>
+      </div>
+
+      <div id="sanMensajesLista" class="san-mensajes-lista revelar">
+        <div class="loading-row"><span class="spin"></span> Cargando mensajes…</div>
+      </div>
+
+      <form id="sanFormMensaje" class="san-form-mensaje tarjeta tarjeta-hilo revelar" hidden>
+        <div class="campo">
+          <label for="mNombre">Tu nombre</label>
+          <input id="mNombre" name="nombre" type="text" placeholder="¿Quién deja este mensaje?" required maxlength="80" />
+        </div>
+        <div class="campo">
+          <label for="mMensaje">Tu mensaje</label>
+          <textarea id="mMensaje" name="mensaje" rows="4" placeholder="Escribe un recuerdo, una palabra, lo que quieras dejar aquí…" maxlength="600"></textarea>
+        </div>
+        <div class="san-form-adjunto">
+          <button type="button" class="btn-ghost" id="btnAdjuntarFoto">+ Adjuntar una foto</button>
+          <img id="adjuntoPreview" class="san-form-adjunto-preview" alt="" />
+          <input type="file" id="inputAdjunto" accept="image/*" hidden />
+        </div>
+        <button type="submit" class="btn btn-block" id="btnEnviarMensaje">Dejar mensaje</button>
+      </form>
+
+      <p id="sanComentariosCerrados" class="san-comentarios-cerrados" hidden>
+        Este santuario no está recibiendo mensajes de visitantes por ahora.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer id="footer"></footer>
+
+<!-- ===================================================================== LIGHTBOX -->
+<div id="sanLightbox" class="san-lightbox">
+  <button class="san-lightbox-cerrar" id="btnCerrarLightbox" aria-label="Cerrar">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>
+  </button>
+  <button class="san-lightbox-prev" id="btnLightboxPrev" aria-label="Anterior">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+  </button>
+  <div class="san-lightbox-contenido" id="sanLightboxContenido"></div>
+  <button class="san-lightbox-next" id="btnLightboxNext" aria-label="Siguiente">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
+</div>
+
+<script type="module" src="/js/gallery.js"></script>
+</body>
+</html>

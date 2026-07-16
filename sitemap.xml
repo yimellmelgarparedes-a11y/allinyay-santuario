@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ALLINYAY · sitemap.xml
+  Reemplaza TU-DOMINIO por tu dominio real antes de desplegar.
+  Los santuarios individuales (/s/{slug}) son páginas dinámicas generadas en
+  tiempo real desde Supabase: no existen como archivos y no tiene sentido
+  listarlas aquí una por una. Si más adelante quieres que Google las indexe
+  individualmente, la forma correcta es generar este archivo automáticamente
+  (por ejemplo con una GitHub Action que consulte Supabase), no a mano.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://TU-DOMINIO/index.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://TU-DOMINIO/login.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+  </url>
+</urlset>

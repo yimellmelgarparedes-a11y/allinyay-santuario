@@ -1,0 +1,225 @@
+/* =============================================================================
+   ALLINYAY · css/dashboard.css
+   Layout del panel administrador: sidebar, resumen (stats), grilla de
+   santuarios y filtros. Extiende style.css — no redefine tokens ni botones.
+   admin.css cubre lo específico del editor de un santuario (tabs, formulario,
+   subida de archivos, moderación de comentarios, panel de QR).
+   ============================================================================= */
+
+.cuerpo-dashboard { background: var(--bg); min-height: 100vh; }
+
+.dash-shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: calc(100vh - 69px); /* resta la altura aprox. de la navbar */
+}
+
+/* =============================================================================
+   SIDEBAR
+   ============================================================================= */
+.dash-sidebar {
+  border-right: 1px solid var(--borde);
+  padding: 28px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: sticky;
+  top: 69px;
+  height: calc(100vh - 69px);
+}
+.dash-nav { display: flex; flex-direction: column; gap: 4px; }
+.dash-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  background: none;
+  border: none;
+  border-radius: var(--radio-sm);
+  color: var(--crema-dim);
+  font-size: 14.5px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.dash-nav-item svg { flex-shrink: 0; opacity: 0.85; }
+.dash-nav-item:hover { background: var(--surface); color: var(--crema); }
+.dash-nav-activo, .dash-nav-activo:hover {
+  background: rgba(211, 163, 78, 0.14);
+  color: var(--oro-claro);
+}
+.dash-nav-salir {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  font-size: 13.5px;
+  color: var(--crema-tenue);
+  transition: color 0.2s ease;
+}
+.dash-nav-salir:hover { color: var(--oro-claro); }
+
+@media (max-width: 900px) {
+  .dash-shell { grid-template-columns: 1fr; }
+  .dash-sidebar {
+    position: static;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--borde);
+    flex-direction: row;
+    align-items: center;
+    padding: 12px clamp(16px, 4vw, 32px);
+  }
+  .dash-nav { flex-direction: row; }
+  .dash-nav-salir { display: none; }
+}
+
+/* =============================================================================
+   CONTENIDO PRINCIPAL
+   ============================================================================= */
+.dash-main { padding: clamp(24px, 4vw, 44px); max-width: 1160px; }
+
+.dash-vista { display: none; }
+.dash-vista-activa { display: block; animation: aparecerSuave 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+.dash-cabecera { margin-bottom: 30px; }
+.dash-cabecera h1 { font-size: clamp(24px, 3vw, 32px); }
+.dash-cabecera p { margin-top: 8px; color: var(--crema-dim); font-size: 14.5px; }
+.dash-cabecera-accion { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+
+/* =============================================================================
+   STATS (resumen)
+   ============================================================================= */
+.dash-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.dash-stat {
+  background: var(--surface);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 20px 22px;
+  backdrop-filter: blur(14px);
+}
+.dash-stat-icono {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  display: grid; place-items: center;
+  background: rgba(211, 163, 78, 0.14);
+  color: var(--oro-claro);
+  margin-bottom: 14px;
+}
+.dash-stat strong { display: block; font-family: var(--f-display); font-size: 27px; }
+.dash-stat span { font-size: 13px; color: var(--crema-tenue); }
+@media (max-width: 900px) { .dash-stats-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .dash-stats-grid { grid-template-columns: 1fr; } }
+
+.dash-panel { padding: 24px 26px; }
+.dash-panel-cabecera { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+.dash-panel-cabecera h2 { font-size: 18px; font-weight: 500; }
+.dash-panel-cabecera p { margin-top: 4px; color: var(--crema-dim); font-size: 13.5px; width: 100%; }
+
+/* =============================================================================
+   FILTROS Y GRILLA DE SANTUARIOS
+   ============================================================================= */
+.dash-filtros { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+.dash-buscador {
+  flex: 1 1 260px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-sm);
+  padding: 0 14px;
+}
+.dash-buscador svg { color: var(--crema-tenue); flex-shrink: 0; }
+.dash-buscador input {
+  flex: 1;
+  background: none; border: none; outline: none;
+  color: var(--crema);
+  padding: 12px 0;
+  font-family: var(--f-cuerpo);
+  font-size: 14.5px;
+}
+.dash-buscador input::placeholder { color: var(--crema-tenue); }
+
+#filtroEstado {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-sm);
+  padding: 12px 14px;
+  color: var(--crema);
+  font-family: var(--f-cuerpo);
+  font-size: 14px;
+}
+
+.dash-santuarios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.santuario-card {
+  background: var(--bg-elevada);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+}
+.santuario-card:hover { transform: translateY(-4px); border-color: var(--borde-fuerte); }
+.santuario-card-media {
+  height: 130px;
+  background: linear-gradient(160deg, var(--bg-elevada), var(--bg-alt));
+  display: flex; align-items: center; justify-content: center;
+  color: var(--oro-claro);
+  background-size: cover;
+  background-position: center;
+}
+.santuario-card-body { padding: 16px 18px; }
+.santuario-card-body h3 { font-size: 16px; font-weight: 500; }
+.santuario-card-body p { margin-top: 4px; font-size: 12.5px; color: var(--crema-tenue); }
+.santuario-card-pie { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; }
+.santuario-card-menu {
+  position: absolute; top: 10px; right: 10px;
+  display: flex; gap: 6px;
+  opacity: 0; transition: opacity 0.2s ease;
+}
+.santuario-card:hover .santuario-card-menu,
+.santuario-card:focus-within .santuario-card-menu { opacity: 1; }
+.santuario-card-menu button {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  background: rgba(15, 12, 25, 0.75);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--borde);
+  color: var(--crema);
+  display: grid; place-items: center;
+  cursor: pointer;
+}
+.santuario-card-menu button:hover { border-color: var(--borde-fuerte); color: var(--oro-claro); }
+
+/* =============================================================================
+   BADGES DE ESTADO (compartidos con el editor)
+   ============================================================================= */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: 999px;
+}
+.badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.badge-activo { background: rgba(107, 201, 140, 0.14); color: var(--exito); }
+.badge-borrador { background: rgba(211, 163, 78, 0.14); color: var(--oro-claro); }
+.badge-archivado { background: rgba(255, 255, 255, 0.06); color: var(--crema-tenue); }

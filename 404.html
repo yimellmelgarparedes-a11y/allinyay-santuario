@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Página no encontrada · ALLINYAY</title>
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/animations.css" />
+
+<script>
+  /**
+   * GitHub Pages es 100% estático: no existe una carpeta /s/{slug} real por
+   * cada santuario, así que cualquier visita a /s/algo cae aquí (404). Antes
+   * de mostrar el error, revisamos si la ruta tiene esa forma y, si es así,
+   * redirigimos de inmediato a /santuario.html?slug=algo, que sí sabe cargar
+   * el santuario dinámicamente. Así el QR impreso (/s/{slug}) funciona sin
+   * necesidad de un servidor propio.
+   */
+  (function () {
+    var coincide = window.location.pathname.match(/^\/s\/([a-zA-Z0-9-]+)\/?$/);
+    if (coincide) {
+      window.location.replace('/santuario.html?slug=' + encodeURIComponent(coincide[1]) + window.location.search.replace(/^\?/, '&'));
+    }
+  })();
+</script>
+</head>
+<body>
+
+<header id="navbar"></header>
+
+<div class="san-pantalla-estado" style="min-height:80vh">
+  <div class="estado-vacio">
+    <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3c2 3-1 4-1 6.5a2.5 2.5 0 0 0 5 0c0-1.5-1-2.5-1-2.5s1.6 2.2 1.6 4.5a4.1 4.1 0 0 1-8.2 0c0-4.7 3.6-5.3 3.6-8.5z"/><path d="M4 21c1.6-2 4-3 8-3s6.4 1 8 3"/></svg>
+    <h4>No encontramos esta página</h4>
+    <p>Puede que el enlace esté mal escrito o ya no exista.</p>
+    <a class="btn" style="margin-top:20px" href="/index.html">Volver al inicio</a>
+  </div>
+</div>
+
+<footer id="footer"></footer>
+
+<script type="module">
+  import { renderNavbar } from '/components/navbar.js';
+  import { renderFooter } from '/components/footer.js';
+  renderNavbar(document.getElementById('navbar'), 'publica');
+  renderFooter(document.getElementById('footer'), 'minimo');
+</script>
+</body>
+</html>

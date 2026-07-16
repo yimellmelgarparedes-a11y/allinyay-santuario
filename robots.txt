@@ -1,0 +1,9 @@
+# ALLINYAY · robots.txt
+# Reemplaza TU-DOMINIO por tu dominio real antes de desplegar (ver README.md).
+
+User-agent: *
+Allow: /
+Disallow: /dashboard.html
+Disallow: /login.html
+
+Sitemap: https://TU-DOMINIO/sitemap.xml

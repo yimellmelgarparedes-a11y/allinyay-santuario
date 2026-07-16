@@ -1,0 +1,95 @@
+/* =============================================================================
+   ALLINYAY · css/animations.css
+   Keyframes y utilidades de animación. Todo respeta prefers-reduced-motion
+   (ver el bloque global en style.css que anula duraciones).
+   ============================================================================= */
+
+/* -- Llama de vela: parpadeo sutil, nunca frenético -------------------------- */
+@keyframes parpadeoVela {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  25% { transform: scale(1.03, 0.98) rotate(-1deg); opacity: 0.96; }
+  50% { transform: scale(0.98, 1.04) rotate(1deg); opacity: 1; }
+  75% { transform: scale(1.02, 0.99) rotate(-0.5deg); opacity: 0.97; }
+}
+
+@keyframes giroLento {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes brilloSkeleton {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* -- Revelado al hacer scroll (IntersectionObserver en app.js añade .visible) */
+.revelar {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.revelar.visible { opacity: 1; transform: translateY(0); }
+
+.revelar-escalonado.visible > * {
+  animation: aparecerSuave 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.revelar-escalonado.visible > *:nth-child(1) { animation-delay: 0.02s; }
+.revelar-escalonado.visible > *:nth-child(2) { animation-delay: 0.09s; }
+.revelar-escalonado.visible > *:nth-child(3) { animation-delay: 0.16s; }
+.revelar-escalonado.visible > *:nth-child(4) { animation-delay: 0.23s; }
+.revelar-escalonado.visible > *:nth-child(5) { animation-delay: 0.3s; }
+.revelar-escalonado.visible > *:nth-child(6) { animation-delay: 0.37s; }
+
+@keyframes aparecerSuave {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* -- Hilván que se "cose" al entrar en vista ---------------------------------- */
+.hilvan path {
+  stroke-dasharray: 9 11;
+  stroke-dashoffset: 400;
+  transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hilvan.visible path { stroke-dashoffset: 0; }
+
+/* -- Entrada del hero (orquestada, un único momento fuerte) ------------------- */
+.hero-kicker, .hero h1, .hero-copy, .hero-acciones, .hero-metrica {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: entradaHero 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.hero-kicker { animation-delay: 0.05s; }
+.hero h1 { animation-delay: 0.16s; }
+.hero-copy { animation-delay: 0.28s; }
+.hero-acciones { animation-delay: 0.4s; }
+.hero-metrica { animation-delay: 0.5s; }
+.hero-escena { opacity: 0; animation: aparecerEscena 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; }
+
+@keyframes entradaHero {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes aparecerEscena {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* -- Hover elegante en tarjetas ------------------------------------------------ */
+.tarjeta, .beneficio, .testimonio, .proceso-paso, .memory-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.35s ease;
+}
+.beneficio:hover, .testimonio:hover, .proceso-paso:hover {
+  transform: translateY(-4px);
+  border-color: var(--borde-fuerte);
+}
+.memory-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* -- Toasts y modal ya animan vía JS con estilos inline; aquí solo transiciones globales -- */
+.faq-item, .btn, .btn-ghost { transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease; }
